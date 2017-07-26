@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-zju" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/26/zju/" class="article-date">
+  <time datetime="2017-07-26T06:10:05.000Z" itemprop="datePublished">2017-07-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#D3.js</p>
+<p>##D3简介</p>
+<p>######优点</p>
+<ul>
+<li>功能丰富，相对底层，自由度高</li>
+<li>代码优雅<br>######缺点</li>
+<li>学习曲线高</li>
+<li>性能问题<br>######最近进展</li>
+<li>版本4.9.1</li>
+<li>Canvas的支持</li>
+<li>d3.express<ul>
+<li>响应式编程</li>
+<li>d3.express/login</li>
+<li>a better way to code</li>
+</ul>
+</li>
+<li>参考资料<ul>
+<li><a href="https://github.com/d3/d3" target="_blank" rel="external">源代码</a></li>
+<li><a href="https://d3js.org" target="_blank" rel="external">官网</a></li>
+<li>作者博客</li>
+<li><a href="www.w3school.com">w3school</a></li>
+<li>后端（Apache）<br>##安装部署<br>######调试工具<br>##D3程序编写<br>######D3的缩进<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">d3.select(&quot;body&quot;)</div><div class="line">.append(&quot;svg&quot;)</div><div class="line">    .attr(&quot;width&quot;, width)</div><div class="line">    .attr(&quot;height&quot;, height)</div><div class="line">.append(&quot;g&quot;)</div><div class="line">    .attr(&quot;transform&quot;, &quot;tra...&quot;)</div><div class="line">.append(&quot;rect&quot;)</div><div class="line">...</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p>######SVG坐标系</p>
+<ul>
+<li>原点在左上</li>
+<li>transform…</li>
+<li>scale<br>######样例<ul>
+<li>数据绑定<ul>
+<li>enter<ul>
+<li>数据无对应对象</li>
+</ul>
+</li>
+<li>update<br>  - </li>
+<li>exit</li>
+<li>key函数<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.data(data, function(d, i) &#123; ...&#125;)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>##进阶</p>
+<p>######d3.layout</p>
+<p>######性能</p>
+<ul>
+<li>DOM/<br>######性能优化</li>
+<li>更新</li>
+<li>使用H5</li>
+<li>改变数据显示方式</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/26/zju/" data-id="cj5kmw0ep0000klxuvvx0jmsh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/26/zju/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
