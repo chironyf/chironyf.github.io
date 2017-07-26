@@ -1,13 +1,13 @@
 <!DOCTYPE html><html lang="null"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>D3.js简介 | Chironyf</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">D3.js简介</h1><a id="logo" href="/.">Chironyf</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">D3.js简介</h1><div class="post-meta">Jul 26, 2015<script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
 <li>功能丰富，相对底层，自由度高</li>
-<li><p>代码优雅</p>
-<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4></li>
-<li><p>学习曲线高</p>
-</li>
-<li><p>性能问题</p>
-<h4 id="最近进展"><a href="#最近进展" class="headerlink" title="最近进展"></a>最近进展</h4></li>
-<li><p>版本4.9.1</p>
-</li>
+<li>代码优雅</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ul>
+<li>学习曲线高</li>
+<li>性能问题</li>
+</ul>
+<h4 id="最近进展"><a href="#最近进展" class="headerlink" title="最近进展"></a>最近进展</h4><ul>
+<li>版本4.9.1</li>
 <li>Canvas的支持</li>
 <li>d3.express<ul>
 <li>响应式编程</li>
@@ -20,18 +20,18 @@
 <li><a href="https://d3js.org" target="_blank" rel="external">官网</a></li>
 <li>作者博客</li>
 <li><a href="www.w3school.com">w3school</a></li>
-<li>后端（Apache）<h4 id="D3的缩进"><a href="#D3的缩进" class="headerlink" title="D3的缩进"></a>D3的缩进</h4></li>
+<li>后端（Apache）</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">d3</span><span class="selector-class">.select</span>(<span class="string">"body"</span>)</div><div class="line"><span class="selector-class">.append</span>(<span class="string">"svg"</span>)</div><div class="line">    <span class="selector-class">.attr</span>(<span class="string">"width"</span>, width)</div><div class="line">    <span class="selector-class">.attr</span>(<span class="string">"height"</span>, height)</div><div class="line"><span class="selector-class">.append</span>(<span class="string">"g"</span>)</div><div class="line">    <span class="selector-class">.attr</span>(<span class="string">"transform"</span>, <span class="string">"tra..."</span>)</div><div class="line"><span class="selector-class">.append</span>(<span class="string">"rect"</span>)</div><div class="line">...</div></pre></td></tr></table></figure>
+<h4 id="D3的缩进"><a href="#D3的缩进" class="headerlink" title="D3的缩进"></a>D3的缩进</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">d3</span><span class="selector-class">.select</span>(<span class="string">"body"</span>)</div><div class="line"><span class="selector-class">.append</span>(<span class="string">"svg"</span>)</div><div class="line">    <span class="selector-class">.attr</span>(<span class="string">"width"</span>, width)</div><div class="line">    <span class="selector-class">.attr</span>(<span class="string">"height"</span>, height)</div><div class="line"><span class="selector-class">.append</span>(<span class="string">"g"</span>)</div><div class="line">    <span class="selector-class">.attr</span>(<span class="string">"transform"</span>, <span class="string">"tra..."</span>)</div><div class="line"><span class="selector-class">.append</span>(<span class="string">"rect"</span>)</div><div class="line">...</div></pre></td></tr></table></figure>
 <h4 id="SVG坐标系"><a href="#SVG坐标系" class="headerlink" title="SVG坐标系"></a>SVG坐标系</h4><ul>
 <li>原点在左上</li>
 <li>transform…</li>
-<li><p>scale</p>
-<h4 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h4></li>
-<li><p>数据绑定</p>
-<ul>
+<li>scale</li>
+</ul>
+<h4 id="样例"><a href="#样例" class="headerlink" title="样例"></a>样例</h4><ul>
+<li>数据绑定<ul>
 <li>enter<ul>
 <li>数据无对应对象</li>
 </ul>
@@ -46,10 +46,11 @@
 <h4 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h4><p>d3.layout</p>
 <p>性能</p>
 <ul>
-<li><p>DOM<br>性能优化</p>
-</li>
-<li><p>更新</p>
-</li>
+<li>DOM</li>
+</ul>
+<p>性能优化</p>
+<ul>
+<li>更新</li>
 <li>使用H5</li>
 <li>改变数据显示方式</li>
 </ul>
