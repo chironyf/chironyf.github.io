@@ -18,21 +18,22 @@ html, button, input, select, textarea,
   font-family: "PingFangSC-Regular", Helvetica, "Helvetica Neue", "Segoe UI", "Hiragino Sans GB", "Source Han Sans CN", "Microsoft YaHei", "STHeiti", "WenQuanYi Micro Hei", sans-serif !important; }
 
 body {
-  background-color: #FFF;
+  background-color: #fff;
   color: #444;
   font-family: "TIBch", "Classic Grotesque W01", "Helvetica Neue", Arial, "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", SimSun, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 14px; }
+  font-size: 12px; }
 
 .body_container {
-  padding: 0 60px;
+  padding: 0 61px;
   max-width: 1150px;
   margin: 0 auto; }
 
 .content_container {
   padding-right: 50px;
-  padding-top: 20px; }
+  padding-top: 20px;
+  padding-bottom: 20px; }
 
 a, button.submit {
   color: #6E7173;
@@ -55,12 +56,12 @@ div {
   box-sizing: border-box; }
 
 #header {
-  padding: 58px 0 0;
+  padding: 12px 0 0;
   text-align: left;
   border-bottom: 1px solid #ddd;
   position: relative; }
   #header .site-name {
-    margin-bottom: 40px; }
+    margin-bottom: 12px; }
     #header .site-name h1 {
       padding: 0;
       margin: 0;
@@ -85,7 +86,7 @@ div {
       padding: 3px 20px 3px;
       line-height: 30px;
       color: #444;
-      font-size: 13px;
+      font-size: 12px;
       border: 1px solid transparent; }
       #header #nav-menu a:hover {
         border-bottom-color: #444; }
@@ -261,7 +262,7 @@ div {
       padding: 0.5em 0;
       margin: auto;
       display: block;
-      box-shadow: 0 0 12px 2px #ccc;
+      box-shadow: 0 0 12px 2px #bbb;
       border-radius: 6px; }
     .post .post-content ul, .post .post-content ol {
       border-radius: 3px;
@@ -442,7 +443,7 @@ pre {
       animation: flaming .7s infinite; }
   #rocket.show {
     visibility: visible;
-    opacity: 1; }
+    opacity: 0; }
   #rocket.launch {
     background-position: 50% -62px;
     opacity: 0;
@@ -735,16 +736,17 @@ pre {
   color: #444;
   margin: -10px 0;
   padding: 5px 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  /*   
+    border: 1px solid #ddd;
+    border-radius: 5px;
+*/
   float: right; }
   .readmore a:after {
     font-family: "FontAwesome";
     content: "\f101";
     padding-left: 0.3em; }
   .readmore a:hover {
-    background: #F8F8F8;
-    border-bottom-color: #D26911; }
+    color: #4682B4; }
 
 /* duoshuo style*/
 #ds-thread #ds-reset {
@@ -865,12 +867,15 @@ pre {
 /* syntax highlight*/
 figure.highlight,
 .codeblock {
-  background: #f7f8f8;
+  background: #fff;
   margin: 10px 0;
-  line-height: 1.1em;
+  line-height: 1.2em;
   color: #333;
-  padding-top: 15px;
-  overflow: hidden; }
+  padding-top: 4px;
+  padding-bottom: 0px;
+  overflow: hidden;
+  box-shadow: 0 0 12px 2px #bbb;
+  border-radius: 6px; }
   figure.highlight table,
   .codeblock table {
     display: block;
@@ -910,15 +915,15 @@ figure.highlight,
       color: #01579f; }
   figure.highlight .gutter,
   .codeblock .gutter {
-    background: #f7f8f8;
+    background: #fff;
     border-right: 1px solid #e6e6e6;
-    padding: 0.3em 15px; }
+    padding: 0.5em 15px; }
     figure.highlight .gutter .line,
     .codeblock .gutter .line {
       color: #aaaaaa; }
   figure.highlight .code,
   .codeblock .code {
-    padding: 0.3em 15px 0.3em 1em;
+    padding: 0.5em 15px 0.3em 1em;
     width: 100%; }
     figure.highlight .code pre,
     .codeblock .code pre {
