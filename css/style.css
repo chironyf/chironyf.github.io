@@ -258,9 +258,12 @@ div {
       border-top: 1px solid #eee;
       position: relative; }
     .post .post-content img {
-      max-width: 99%;
+      max-width: 600px;
+      width: expression(this.width > 600 ? "600px" : "auto");
+      max-height: 400px;
+      height: expression(this.height > 400 ? "400px" : "auto");
       padding: 0.0em 0;
-      margin: auto;
+      margin: left;
       display: block;
       box-shadow: 0 0 12px 2px #bbb;
       border-radius: 6px; }
