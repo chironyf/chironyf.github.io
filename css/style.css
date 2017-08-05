@@ -259,6 +259,7 @@ div {
       position: relative; }
     .post .post-content img {
       max-width: 600px;
+      max-width: 60%;
       width: expression(this.width > 600 ? "600px" : "auto");
       max-height: 400px;
       height: expression(this.height > 400 ? "400px" : "auto");
