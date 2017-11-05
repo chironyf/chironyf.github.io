@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="null"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>操作系统之虚拟存储器 | Chironyf</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">操作系统之虚拟存储器</h1><a id="logo" href="/.">Chironyf</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">操作系统之虚拟存储器</h1><div class="post-meta">Nov 5, 2017<script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><h2 id="虚拟存储器概述"><a href="#虚拟存储器概述" class="headerlink" title="虚拟存储器概述"></a>虚拟存储器概述</h2><blockquote>
+<p>虚拟存储器是指具有<em>请求调入</em>功能和<em>置换</em>功能，能从逻辑上对内存容量加以扩充的一种<em>存储器系统</em>。虚拟存储器技术并不是真正的对物理内存进行扩充，而只是从逻辑上进行内存扩充，让用户感觉内存容量比实际大得多。</p>
+</blockquote>
+<h3 id="为何引入虚拟存储器技术及其理论基础"><a href="#为何引入虚拟存储器技术及其理论基础" class="headerlink" title="为何引入虚拟存储器技术及其理论基础"></a>为何引入虚拟存储器技术及其理论基础</h3><ul>
+<li>传统的存储器管理方式具有<em>一次性</em>，<em>驻留性</em>，大大浪费了内存资源。</li>
+<li>程序运行时遵循<em>局部性原理</em>，包括<em>时间局限性</em>与<em>空间局限性</em>。</li>
+</ul>
+<h3 id="虚拟存储器的基本工作情况"><a href="#虚拟存储器的基本工作情况" class="headerlink" title="虚拟存储器的基本工作情况"></a>虚拟存储器的基本工作情况</h3><p>程序运行时，只需要将当前需要运行的少数页面或段装入内存。如果程序当前访问的页面或段在内存中，便能继续执行；若不在内存中，则发出缺页（段）中断请求将其调入内存；若内存已满，则需要将暂时不用的页面或段调出内存，然后将需要访问的页面或段调入内存。</p>
+<h3 id="虚拟存储器的特征"><a href="#虚拟存储器的特征" class="headerlink" title="虚拟存储器的特征"></a>虚拟存储器的特征</h3><ul>
+<li>多次性（与传统的一次性相对）</li>
+<li>对换性（与传统的驻留性相对）</li>
+<li>虚拟性（指能从逻辑上扩充内存容量，该特性以多次性和对换性为基础）</li>
+</ul>
+<h3 id="虚拟存储器的实现方法"><a href="#虚拟存储器的实现方法" class="headerlink" title="虚拟存储器的实现方法"></a>虚拟存储器的实现方法</h3><ul>
+<li>虚拟存储器的实现需建立在<em>离散分配</em>存储管理方式的基础上。如果是连续分配，则需要事先一次性申请所有内存空间，然后将作业分多次装入内存，这样就导致了大量内存空间处于空闲状态，失去了逻辑扩充的意义。</li>
+<li><em>请求分页</em>系统与<em>请求分段</em>系统，是在分页（分段）系统的基础上增加了请求调页（段）功能和页面（分段）置换功能所形成的页（段）式虚拟存储系统。</li>
+</ul>
+<h2 id="请求分页存储管理方式"><a href="#请求分页存储管理方式" class="headerlink" title="请求分页存储管理方式"></a>请求分页存储管理方式</h2><blockquote>
+<p>请求分页系统建立在基本分页基础上，增加了请求调页功能和页面置换功能。</p>
+</blockquote>
+<h3 id="请求分页系统的硬件支持"><a href="#请求分页系统的硬件支持" class="headerlink" title="请求分页系统的硬件支持"></a>请求分页系统的硬件支持</h3><ol>
+<li>请求页表机制<ul>
+<li>功能<br>将用户地址空间中的逻辑地址映射为内存空间中的物理地址</li>
+<li>页表项数据结构<br>  <img src="/2017/11/05/os-virtual-memory/page-data-item.jpg" alt=""><ul>
+<li>状态位P：标志该页是否在内存中</li>
+<li>访问字段A：记录该页在某段时间内被访问的次数，或者记录多长时间未被访问</li>
+<li>修改位M：标识该页是否被修改</li>
+<li>外存地址：该页在外存上的地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缺页中断机构<ul>
+<li>功能<br>程序访问的页面不存在时，产生缺页中断，请求操作系统将所缺的页面调入内存。</li>
+<li>与一般中断的区别<ul>
+<li>CPU一般在一条指令执行完之后才检查是否有中断请求。缺页中断是在指令执行期间产生和处理的。</li>
+<li>一条指令执行期间可能产生多次缺页中断。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>地址变换机构<ul>
+<li>功能<br>通过页号形成物理地址。</li>
+<li>工作过程（这个图是在课本上拍的，网上找到好几个不同的版本，主要是修改页表之后的操作不同）<br>  <img src="/2017/11/05/os-virtual-memory/address-change-process.jpg" alt=""></li>
+</ul>
+</li>
+</ol>
+<h3 id="请求分页中的内存分配"><a href="#请求分页中的内存分配" class="headerlink" title="请求分页中的内存分配"></a>请求分页中的内存分配</h3><p>简单来说就是如何给不同的进程分配物理块。。。</p>
+<ul>
+<li>基本概念<ul>
+<li><em>最小物理块数</em>：是指进程能正常运行所需的最小的物理块数，一旦分配的物理块数小于这个值，进程将无法运行。</li>
+</ul>
+</li>
+<li>内存分配策略<ul>
+<li><em>固定分配局部置换</em>：是指进程分配的物理块数在进程运行期间不再变化，即从进程从运行开始到结束所拥有的物理块数是固定的。局部置换是进程一旦发生缺页，只能从该进程已分配的页面中选择一页调出并置换出新的页面。</li>
+<li><em>可变分配全局置换</em>：是指进程分配的物理块数在进程运行期间可以变化，即从进程从运行开始到结束所拥有的物理块数是动态的。全局置换是进程一旦发生缺页，可以从别的进程或者OS的空闲物理块分配物理块给它，然后将缺页调入。如果是从OS的空闲物理块分配，那么该进程的内存空间会增加，别的进程不会受到影响。如果OS的空闲物理块用完了，那就只能调页出去了，被调页的进程是不确定的，可能是内存中的任何一个进程，一旦<em>某进程</em>的页面被调出去后再调进来<em>该进程</em>的页面，那么某进程的物理块会减少，缺页率会增加。</li>
+<li><em>可变分配局部置换</em>：我觉得这应该是在这几种中最好的物理块分配策略。首先，如果某进程缺页的话，只能调出该进程的页面进行置换；其次对于频繁缺页的进程，适当增加其分配的物理块，对于基本不怎么缺页的进程，适当减少其分配的物理块。</li>
+</ul>
+</li>
+<li>物理块分配算法<ul>
+<li><em>平均分配算法</em>：非常弱智的算法，简直幼儿园水平好吗:)</li>
+<li><em>按比例分配算法</em>：这个算法算比较正常了，按每个进程的页面数对应的比例进行物理块的分配。</li>
+<li><em>考虑优先权的分配算法</em>：将物理块分为两部分，一部分按比例分配，另一部分按进程的优先权分配。</li>
+</ul>
+</li>
+</ul>
+<h3 id="页面调入策略"><a href="#页面调入策略" class="headerlink" title="页面调入策略"></a>页面调入策略</h3><p>简单来说就是页面应该什么时候调？从哪儿调？怎么调？</p>
+<ul>
+<li>确定何时调入的策略（难道不是缺页的时候调用吗？不一定，可以提前调）<ul>
+<li><em>请求调页策略</em>：最简单的一种，就是当发现缺页的时候就调入，但是每次只能调入1页，太浪费I/O资源了。</li>
+<li><em>预调页策略</em>：将预计会调入的页面调入（这难道不是废话），但是预测成功率只有50%。具体是怎么预测的感觉书上没说清楚。</li>
+</ul>
+</li>
+<li>从哪儿调<ul>
+<li>基本概念<ul>
+<li>分页系统的外存可分为<em>文件区</em>和<em>对换区</em>。文件区是存放文件的，对换区是存放对换页面的，文件区是离散分配，对换区是连续分配。所以对换区的数据存取比文件去要快。</li>
+<li><em>缺页率</em>：进程在运行过程中，访问页面成功次数为$T$，失败次数为$F$（即从外存调入的次数），总次数为$S = T + F$，则缺页率$f = \frac{F}{S}$</li>
+<li>若页面被修改的概率为$β$，其缺页中断的处理时间为$t_a$，未被修改的置换页面中断处理时间为$t_b$，则<em>缺页中断处理时间 </em>$t = βt_a + (1 - β)t_b$</li>
+</ul>
+</li>
+<li>当对换区空间足够大时：先将进程有关的文件从文件区调入对换区（进程运行前已经完成），然后从对换区调入内存。</li>
+<li>当对换区空间不够大时：凡是不会修改的文件，直接从文件区调入内存，这样不用再写回去。可能被修改的文件则调到对换区。</li>
+<li><em>UNIX方式</em>：未运行过的页面，都在文件区；被换出的页面都在对换区，下次调入时直接从对换区调入即可。（UNIX允许页面共享）</li>
+</ul>
+</li>
+<li>怎么调<ul>
+<li>与中断类似，除了产生以及处理时间有区别。</li>
+</ul>
+</li>
+</ul>
+<h3 id="页面置换算法（Page-Replacement-Algorithms）"><a href="#页面置换算法（Page-Replacement-Algorithms）" class="headerlink" title="页面置换算法（Page-Replacement Algorithms）"></a>页面置换算法（Page-Replacement Algorithms）</h3><p>简单来说就是在需要页面置换的时候<em>决定</em>把<em>哪个页面</em>置换出去的算法</p>
+<ul>
+<li><em>最佳（Optimal）置换算法</em><br>每次选择的被置换出的页面是之后<em>最晚</em>被访问的页面，但是实际上是实现不了的，因为无法预知哪个页面是最晚被访问的。</li>
+<li><em>先进先出（FIFO）置换算法</em><br>每次选择的被置换出的页面是当前物理块中最早进入的页面，由于不符合进程运行访问页面的规律，这种算法效率很低。</li>
+<li><em>最近最久未使用（Least Recentily Used， LRU）置换算法</em><br>每次选择的被置换出的页面是其距上一次被访问时间最长的页面，因此需要给每个页面一个字段记录这个时间$t$，每次选择$t$最大的页面置换出去即可。<br>下面讨论一下这种算法的<em>实现方法</em><br><em>移位寄存器</em>，给进程的每个页面分配一个寄存器，每当这个页面被访问就将对应寄存器的最高位置1，然后设置一个固定的时间间隔，每到这个时间，所有寄存器向右移动一位。每次选出来的被置换的页面就是对应寄存器值最小的页面。<br><em>栈</em>，每次访问一个页面，就将该页面的页面号放入栈顶，其余页面的顺序保持不变，这样就可以保证栈顶的页面始终是最近被访问的，栈底的页面始终是最久未被访问的，当发生缺页的时候，直接将栈底的页面置换出去即可。</li>
+<li><em>最少使用（Least Frequently Used，LFU）置换算法</em><br>每次选择的被置换出的页面是最近一段时间内访问次数最少的页面，同样是利用<em>移位寄存器</em>实现，每当页面被访问，将其对应的寄存器最高位置1，隔一段时间右移一次，选出的被置换的页面是$\sum{R_i}$最小的页面，注意与$LRU$的区别，$LRU$是$R$最小。</li>
+<li>还有Clock置换算法与页面缓冲算法</li>
+</ul>
+<h3 id="抖动"><a href="#抖动" class="headerlink" title="抖动"></a>抖动</h3><p>由于程序只需要调入一部分即可运行，故装入多个程序可以一高CPU的利用率，随着内存中进程数目的增加，CPU利用率先上升到达最大值，然后开始下降，下降的原因是，进程数目增多之后，每个进程分配的物理块过少，所以需要频繁地产生缺页中断，导致大部分时间在等待I/O操作，浪费了CPU资源，此时的进程就处于<em>抖动</em>状态。<br><img src="/2017/11/05/os-virtual-memory/thrashing.png" alt=""><br>关于抖动的预防，可以采取以下四种策略：</p>
+<ul>
+<li>采取局部置换策略</li>
+<li>把工作集算法融入到处理机调度中</li>
+<li>利用“L=S”准则调节缺页率</li>
+<li>选择暂停的进程</li>
+</ul>
+<h3 id="工作集"><a href="#工作集" class="headerlink" title="工作集"></a>工作集</h3><p>是指在某段时间间隔里面，进程所需要访问的页面的集合。实际上是$(t - △，t)$中引用页面的集合。<br>工作集的<em>窗口尺寸</em>是指工作集中页面的数量。</p>
+<h2 id="请求分段的存储管理方式"><a href="#请求分段的存储管理方式" class="headerlink" title="请求分段的存储管理方式"></a>请求分段的存储管理方式</h2><blockquote>
+<p>与请求分页的区别是，不是以<em>页面</em>为单位进行换入换出的，而是以<em>段</em>，段的长度是不固定的。</p>
+</blockquote>
+<h3 id="请求分段中的硬件支持"><a href="#请求分段中的硬件支持" class="headerlink" title="请求分段中的硬件支持"></a>请求分段中的硬件支持</h3><ol>
+<li>请求段表机制（与页表相同的部分不再废话）<ul>
+<li>段表数据项<br><img src="/2017/11/05/os-virtual-memory/segment-data-item.jpg" alt=""><ul>
+<li>存取方式：标志该段的存取属性，如可执行、可读/写等。</li>
+<li>增补位：标志本段在运行过程中是否做过<em>动态增长</em>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缺段中断机构<ul>
+<li>功能<br>当程序要访问的段不在内存中时，缺段中断机构产生缺段中断信号，然后缺段中断处理程序将所需的段调入内存。</li>
+<li>中断处理过程<br><img src="/2017/11/05/os-virtual-memory/interrupt-processing.png" alt=""></li>
+</ul>
+</li>
+<li>地址变换机构<ul>
+<li>功能<br>通过段号形成物理地址。</li>
+<li>请求分段系统的地址变换过程<br><img src="/2017/11/05/os-virtual-memory/segment-change-process.png" alt=""></li>
+</ul>
+</li>
+</ol>
+</div><div class="tags"><a href="/tags/虚拟存储器/">虚拟存储器</a><a href="/tags/操作系统/">操作系统</a></div><div class="post-nav"><a href="/2017/08/18/new/" class="next">更新</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/Swift/" style="font-size: 15px;">Swift</a> <a href="/tags/UIView/" style="font-size: 15px;">UIView</a> <a href="/tags/UINavigationController/" style="font-size: 15px;">UINavigationController</a> <a href="/tags/地图/" style="font-size: 15px;">地图</a> <a href="/tags/排序/" style="font-size: 15px;">排序</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a> <a href="/tags/虚拟存储器/" style="font-size: 15px;">虚拟存储器</a> <a href="/tags/操作系统/" style="font-size: 15px;">操作系统</a> <a href="/tags/ScrollView/" style="font-size: 15px;">ScrollView</a> <a href="/tags/TableView/" style="font-size: 15px;">TableView</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/11/05/os-virtual-memory/">操作系统之虚拟存储器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/18/new/">更新</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/map-note-1/">iOS开发之使用高德地图（Swift 3.1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/sort/">常见排序算法的分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/01/ios-navigation-1/">iOS学习笔记之实现导航控制器 (Swift 3.1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ios-uiview-1/">iOS学习笔记之自定义UIView（Swift 3.1）</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2017 <a href="/." rel="nofollow">Chironyf.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
