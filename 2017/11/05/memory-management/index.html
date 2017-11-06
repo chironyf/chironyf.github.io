@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="null"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>操作系统之存储器管理 | Chironyf</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">操作系统之存储器管理</h1><a id="logo" href="/.">Chironyf</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">操作系统之存储器管理</h1><div class="post-meta">Nov 5, 2017<script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><blockquote>
+<p>这一章介绍一下<em>内存</em>的管理，其实存储管理的主要对象就是内存。那么为什么需要管理呢？说白了最终目的就是为了提高系统的性能。</p>
+</blockquote>
+<h2 id="存储器的层次结构"><a href="#存储器的层次结构" class="headerlink" title="存储器的层次结构"></a>存储器的层次结构</h2><p>当前几乎所有的计算机系统都采用了分层式存储结构，大致分为三层：<em>寄存器</em>、<em>内存</em>、<em>外存</em>。<br><img src="/2017/11/05/memory-management/memory-hierarchy.jpeg" alt=""></p>
+<ul>
+<li>可执行存储器<br>是指<em>寄存器</em>和<em>主存储器</em>，也就是CPU能直接访问的存储器。</li>
+</ul>
+<h2 id="程序的装入和链接"><a href="#程序的装入和链接" class="headerlink" title="程序的装入和链接"></a>程序的装入和链接</h2><p>一个程序要想运行，要经历编译、链接、装入这三个过程。接下来讨论一下几种不同的装入、链接方式。</p>
+<h3 id="程序的装入方式"><a href="#程序的装入方式" class="headerlink" title="程序的装入方式"></a>程序的装入方式</h3><ul>
+<li><em>绝对装入方式</em><br>这种方式的前提是需要比较容易地知道进程在内存中的位置，然后编译器在这个位置的基础上继续扩展计算出装入模块的位置（这个位置也可以由用户直接指定）。由于计算出的位置与实际物理位置完全相同，故不需要再修改，因此叫做绝对装入方式。</li>
+<li><em>可重定位装入方式</em>（静态重定位）<br>在编译器很难得知装入模块应存放的位置时可采用这种方式。这种方式可使得装入模块中的逻辑地址与实际存放的物理地址不一样，也就是进行了<em>重定位</em>工作。重定位一般是通过对装入模块的逻辑地址（假设基址为0）与实际进程的物理地址（实际的基址）计算实现，由于在装入完成之后物理地址不再改变，所以是静态的。</li>
+<li><em>动态运行时装入方式</em>（动态重定位）<br>这种方式相对于上一种而言的优势就是可以保证进程的地址在变化之后仍然能正确运行，上一种方式由于第一次装入的时候装入模块的地址是根据当时进程的地址计算出来的，而且之后不能改变，如果进程运行过程中自身地址发生变化，那么装入模块的地址也就错了。那么这种方式如何实现呢？有点类似Swift中的lazy特性，只有当需要用到该模块时才将其逻辑地址转换成物理地址，而在未运行的模块中始终是逻辑地址。</li>
+</ul>
+<h3 id="程序的链接方式"><a href="#程序的链接方式" class="headerlink" title="程序的链接方式"></a>程序的链接方式</h3><p>以下几种链接方式是根据<em>进行链接的时间</em>来划分的</p>
+<ul>
+<li><em>静态链接方式</em><br>就是将所有的<em>目标模块</em>和<em>库函数</em>链接成<em>一个</em>完整的装入模块，以后不再拆开。实现这种方式需要注意几个问题，首先是在未链接之前，每个目标模块都是独立的，其中代码的逻辑地址的起始地址都是0，链接之后各个目标模块的起始地址会变化，比如上一个模块起始地址是0，模块长度是M，则当前模块的起始地址应该是M；另外如果模块中有调用别的模块的代码的话，也需要将该部分的地址修改掉。总结起来静态链接方式需要注意两个问题，一是各个目标模块的起始地址，二是模块内部外部调用的地址。</li>
+<li><em>装入时动态链接方式</em><br>这种链接方式是边装入边链接的，就是在装入一个目标模块的时候，如果该目标模块调用了别的模块，装入程序才会去寻找别的模块并将其装入内存。相比于上一种方法，优点是：便于目标模块的修改和更新；便于实现对目标模块的共享。</li>
+<li><em>运行时动态链接</em><br>乍一看这种方式和上一种很相似，都是需要目标模块的时候才装入。但是这两者的区别在于，前者是以该模块是否被别的模块调用为基础的，也就是说可能存在该模块并没有被执行；后者是只有进程执行时需要用到该模块时，OS才会去寻找该模块，也就是保证了所有被装入的目标模块都是需要被执行的。</li>
+</ul>
+<h2 id="连续分配存储管理方式"><a href="#连续分配存储管理方式" class="headerlink" title="连续分配存储管理方式"></a>连续分配存储管理方式</h2><p>这一部分讲的是，程序装入内存时，OS应该如何为其分配空间</p>
+<ul>
+<li><em>单一连续分配</em><br>这是最简单粗暴的一种分配方式，内存被划分为两个区：<em>系统区</em>和<em>用户区</em>。用户区只装一道程序，就是该程序独占用户区的所有空间。</li>
+<li><em>固定分区分配</em><br>这种分配方式是对单一连续分配的改进，允许多道程序进入内存。将用户区划分为若干个大小固定的分区（每个分区的大小可以不同，需要建立一张分区使用表），进程只需要装入合适大小的分区即可。缺点也很明显，分区的大小始终是固定的，进程又是变化的，必然会造成资源的浪费。</li>
+<li><p><em>动态分区分配</em><br>这是最理想的分配方式，进程需要多大空间就分配多少，因此也是最难实现的一种，需要考虑几个问题：分区需要用到的数据结构，分配算法，分配与回收操作。</p>
+<ul>
+<li><p>动态分区分配中的数据结构<br>这个结构是用来描述空闲分区的，常见的有两种：<em>空闲分区表</em>和<em>空闲分区链</em><br><img src="/2017/11/05/memory-management/free-table" alt=""></p>
+<p><img src="/2017/11/05/memory-management/free-list.gif" alt=""><br>空闲分区链是一个双向链表。</p>
+</li>
+<li><p>分配内存<br>流程就是在空闲分区表中找到合适的空闲分区，并将合适大小的空间分配出去，剩下的空间仍然留在空闲分区表（链）中。(下图中m.size是空闲分区的大小，u.size是请求分区的大小)<br><img src="/2017/11/05/memory-management/memory-allocation-process.png" alt=""></p>
+</li>
+<li><p>回收内存<br>进程运行完之后将不用的内存（回收区）放入空闲区中的过程，根据回收区首地址和插入点的不同，分好几种操作。<br><img src="/2017/11/05/memory-management/memory-recovery.jpeg" alt=""></p>
+<ul>
+<li>（a）回收区与插入点前一个空闲分区F1相邻，直接合并，然后修改F1分区的大小即可</li>
+<li>（b）回收区与插入点后一个空闲分区F2相邻，直接合并，然后新的分区的大小是两者之和，首址是空闲分区的首址。</li>
+<li>（c）回收区与插入点前后空闲分区都相邻，直接合并，删掉F2，修改F1即可。</li>
+<li>（d）都不相邻的时候，为回收区新建一个表项，流程见下图。<br><img src="/2017/11/05/memory-management/memory-recovery-process.jpg" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>基于顺序搜索的动态分区分配算法</p>
+<ul>
+<li><em>首次适应（first fit, FF）算法</em><br>要求将空闲分区链按地址递增的次序链接，每次从链首开始查找，直到找到大小能满足要求的空闲分区为止。</li>
+<li><em>循环首次适应（next fit, NF）算法</em><br>与上一种算法的区别在于，每次寻找空闲分区的时候是从上一次寻找的空闲分区的后一个分区开始查找。</li>
+<li><em>最佳适应（best fit, BF）算法</em><br>要求将所有空闲分区按容量从小到大的顺序链接，每次找到的分区总是最小又能满足要求的那一个。</li>
+<li><em>最坏适应（worst fit, WF）算法</em><br>要求将所有空闲分区按容量从大到小的顺序链接，顺序查找，一旦该空闲分区满足要求，就分配。</li>
+</ul>
+</li>
+<li><p>基于索引搜索的动态分区分配算法<br>如果空闲分区链特别长的话，顺序搜索算法会特别慢，所以引入基于索引搜索的动态分区分配算法。</p>
+<ul>
+<li><em>快速适应（quick fit）算法（分类搜索算法）</em><br>基本思想就是建立一个索引表，每个表项对应一个大小相同的空闲分区链表（表项中记录了该链表表头的指针以及分区的大小）。分配内存时，首先找到索引表中最小的能容纳该进程的索引，然后取下该链表的<em>第一项</em>进行分配即可。该算法的缺点在于分区归还主存的算法过于复杂。</li>
+<li><em>伙伴系统（buddy system）</em>（所有分区都是$2^k, (1\leq{k}\leq{m}), 内存总容量为2^m$）<br>简单来说就是对于一个需要分配n的进程，找到$2^{i-1}&lt;{n}\leq{2^i}$的i，然后在空闲分区大小为$2^i$的分区链表中查找，若找到就分配，未找到，就在$2^{i+1}$中查找，若找到，先分成两个$2^i$的分区，分配一个，另一个加入$2^i$的分区链表，若未找到，继续向上寻找，重复此操作即可。<br>关于伙伴块的地址，对于一个大小为$2^k$，地址为x的内存块，其伙伴块的地址用$buddy_k{(x)}$表示$$buddy_k{(x)} = \lbrace$$</li>
+<li><em>哈希算法</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>汤小丹，梁红兵，哲凤屏，汤子瀛. 计算机操作系统. 4版. 西安：西安电子科技大学出版社，2015 </li>
+</ul>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://chironyf.com/2017/11/05/memory-management/" data-id="cj9mseejm00048676pz63szxw" class="article-share-link">分享</a><div class="tags"><a href="/tags/操作系统/">操作系统</a><a href="/tags/存储器管理/">存储器管理</a></div><div class="post-nav"><a href="/2017/11/05/os-virtual-memory/" class="next">操作系统之虚拟存储器</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/存储器管理/" style="font-size: 15px;">存储器管理</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/UINavigationController/" style="font-size: 15px;">UINavigationController</a> <a href="/tags/UIView/" style="font-size: 15px;">UIView</a> <a href="/tags/地图/" style="font-size: 15px;">地图</a> <a href="/tags/操作系统/" style="font-size: 15px;">操作系统</a> <a href="/tags/Swift/" style="font-size: 15px;">Swift</a> <a href="/tags/虚拟存储器/" style="font-size: 15px;">虚拟存储器</a> <a href="/tags/排序/" style="font-size: 15px;">排序</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/11/05/memory-management/">操作系统之存储器管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/05/os-virtual-memory/">操作系统之虚拟存储器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/map-note-1/">iOS开发之使用高德地图（Swift 3.1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/sort/">常见排序算法的分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/01/ios-navigation-1/">iOS学习笔记之实现导航控制器 (Swift 3.1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ios-uiview-1/">iOS学习笔记之自定义UIView（Swift 3.1）</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2017 <a href="/." rel="nofollow">Chironyf.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
