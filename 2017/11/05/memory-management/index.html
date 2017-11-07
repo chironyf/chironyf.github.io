@@ -49,12 +49,40 @@
 <li><p>基于索引搜索的动态分区分配算法<br>如果空闲分区链特别长的话，顺序搜索算法会特别慢，所以引入基于索引搜索的动态分区分配算法。</p>
 <ul>
 <li><em>快速适应（quick fit）算法（分类搜索算法）</em><br>基本思想就是建立一个索引表，每个表项对应一个大小相同的空闲分区链表（表项中记录了该链表表头的指针以及分区的大小）。分配内存时，首先找到索引表中最小的能容纳该进程的索引，然后取下该链表的<em>第一项</em>进行分配即可。该算法的缺点在于分区归还主存的算法过于复杂。</li>
-<li><em>伙伴系统（buddy system）</em>（所有分区都是$2^k, (1\leq{k}\leq{m}), 内存总容量为2^m$）<br>简单来说就是对于一个需要分配n的进程，找到$2^{i-1}&lt;{n}\leq{2^i}$的i，然后在空闲分区大小为$2^i$的分区链表中查找，若找到就分配，未找到，就在$2^{i+1}$中查找，若找到，先分成两个$2^i$的分区，分配一个，另一个加入$2^i$的分区链表，若未找到，继续向上寻找，重复此操作即可。<br>关于伙伴块的地址，对于一个大小为$2^k$，地址为x的内存块，其伙伴块的地址用$buddy_k{(x)}$表示$$buddy_k{(x)} = \lbrace$$</li>
-<li><em>哈希算法</em></li>
+<li><em>伙伴系统（buddy system）</em>（所有分区都是$2^k, (1\leq{k}\leq{m})$，内存总容量为$2^m$）<br>简单来说就是对于一个需要分配n的进程，找到$2^{i-1}&lt;{n}\leq{2^i}$的i，然后在空闲分区大小为$2^i$的分区链表中查找，若找到就分配，未找到，就在$2^{i+1}$中查找，若找到，先分成两个$2^i$的分区，分配一个，另一个加入$2^i$的分区链表，若未找到，继续向上寻找，重复此操作即可。<br>关于伙伴块的地址，对于一个大小为$2^k$，地址为x的内存块，其伙伴块的地址用$buddy_k{(x)}$表示<br><em>$$<br>buddy_k{(x)} = \lbrace<br>\begin {aligned}<br>x + 2^k (x MOD 2^{k+1}&amp;=0) \\<br>x - 2^k (x MOD 2^{k+1}&amp;=2^{k})<br>\end {aligned}<br>$$</em></li>
+<li><em>哈希算法</em><br>这种算法与上述三种的设计思想都不一样，首先是根据空闲分区在空闲分区表中的分布规律建立一个Hash函数，以空闲分区的大小作为Hash表的关键字，值是空闲分区链表表头指针。分配的时候，直接根据空闲分区的大小得到对应链表表头指针进行分配。</li>
+</ul>
+</li>
+<li><p>动态可重定位分区分配<br>上述的几种分配方案都属于连续分配方案，也就是程序需要分配内存空间时，分配的必须是一片连续的内存空间。这样做的缺点就是，内存中会产生许多<em>碎片</em>，如果此时有新的程序需要分配空间，但是每个碎片的空间都不够，就算是总和够的话也不能分配，这样大大浪费了内存资源。下面讨论一下这几个问题。</p>
+<ul>
+<li>紧凑<br>意思是将已分配的空间进行移动，使所有碎片相邻，这样就能合并出大的空闲空间。要注意的是，当进程的物理地址改变之后，要进行重定位，否则程序无法执行。由于每次紧凑都需要重定位，大大影响了系统效率，因此需要一种合理的解决办法。</li>
+<li>动态重定位<br>对于进程设置一个<em>重定位寄存器</em>，每次“紧凑”操作时，不需要对程序进行任何修改，只需要将新的内存地址放入重定位寄存器中即可，每当要执行某条指令时，系统自动完成重定位功能，具体流程见下图。<br><img src="/2017/11/05/memory-management/dynamic-relocation.png" alt=""></li>
+<li>动态重定位分区分配算法<br>这种算法就是在动态分区分配算法上加入了紧凑的功能。具体流程见下图<br><img src="/2017/11/05/memory-management/dynamic-partition-allocation.gif" alt=""></li>
 </ul>
 </li>
 </ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<h2 id="对换"><a href="#对换" class="headerlink" title="对换"></a>对换</h2><p>简单来说对换就是将当前不需要用到的作业调出内存，将外存中就绪的的作业调入内存。</p>
+<h2 id="分页存储管理方式"><a href="#分页存储管理方式" class="headerlink" title="分页存储管理方式"></a>分页存储管理方式</h2><p>这是一种为了避免需要<em>紧凑</em>才能产生更大空间进行分配而采用的方式，属于离散分配，离散分配还包括分段存储管理方式，段页式存储管理方式。</p>
+<ul>
+<li><p>分页存储管理的基本方法</p>
+<ol>
+<li>页面和物理块<br>这种方式将进程的逻辑地址分成很多页并为其编号（从0开始），同时也将内存分成很多<em>物理块</em>，内存分配的时候，直接将进程的页面放入物理块中，多个页面需要多个可以不相邻的物理块。由于进程的最后一页可能不会装满一个物理块，于是就形成了<em>页内碎片</em>。<br>页面的大小一般为$2^k$，过小过大都不合适，过小的话可以减少页内碎片，但是容易导致进程的页表过长，占用内存，换进换出的效率也会降低；过大的话会使页内碎片增大。</li>
+<li>分页地址的地址结构<br>将进程的逻辑地址转换成分页地址存储在此结构中（图中可以看出页面共1M个，内面大小为4k）。<br><img src="/2017/11/05/memory-management/page-address-structure.png" alt=""><br>如果某进程中逻辑地址为A，页面大小为L，那么页号P和页内地址d为<br>$$<br>P = INT[\frac{A}{L}]，d = [A]MOD(L)<br>$$</li>
+<li>页表<br>页表是针对每个进程建立的，每个进程的页面划分好之后，都会有一个对应的物理块，页表保存的就是页号对应的物理块号。<br><img src="/2017/11/05/memory-management/page-list.jpg" alt=""></li>
+</ol>
+</li>
+<li><p>地址变换机构<br>功能是将进程的逻辑地址转变为内存中的物理地址，实际上需要完成页号到块号的变换即可，因为页内和块内的地址是一一对应的，不需要变换。因此，可以借助页表来实现。</p>
+<ol>
+<li>基本的地址变换机构<br>需要<em>一个</em>页表寄存器PTR（Page-Table Register）保存页表在内存中的起始地址和页表长度。最开始的时候，页表始址和页表长度保存在进程的PCB中，当该进程被调度时，才将数据放入PTR。当进程要访问某数据时，分页地址变换机构会自动将相对地址分为页号和页内地址两部分，然后根据页号去检索页表，流程见下图<br><img src="/2017/11/05/memory-management/page-address-change.png" alt=""></li>
+<li>具有快表的地址变换机构<br>上一种基本方式在获取需要的数据需要两次访问内存，效率较低，为了减少两次访问的次数，建立快表（通常存放16-512个项），一个高速缓冲寄存器（联想寄存器），用来保存当前访问的页表项，若放满的话找到一个可能用不到的页表项换出即可。每当给出页号时，先在快表中查询，若存在，直接将物理块号送入物理地址寄存器，否则才访问页表。流程图见下<br><img src="/2017/11/05/memory-management/quick-table.gif" alt=""></li>
+</ol>
+</li>
+<li><p>访问内存的有效时间<br>按书上的定义，内存的有效访问时间（Effecitve Access Time）是指从进程发出指定逻辑地址的请求，经过地址变换，到内存中找到对应的实际物理地址单元并取出数据，所需花费的时间总和。<br>对于基本的地址变换由于需要访问内存两次（假设时间都是t），则<br>$$EAT = t + t = 2t$$<br>引入快表之后，假设快表的访问时间为$\lambda$，命中率为a，访问内存时间为t，则<br>$$EAT = a\lambda + (t + \lambda)(1 - a) + t = 2t + \lambda - ta$$<br><img src="/2017/11/05/memory-management/quick-table-eat.png" alt=""></p>
+</li>
+<li><p>两级页表</p>
+</li>
+</ul>
+<h2 id="分段存储管理方式"><a href="#分段存储管理方式" class="headerlink" title="分段存储管理方式"></a>分段存储管理方式</h2><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li>汤小丹，梁红兵，哲凤屏，汤子瀛. 计算机操作系统. 4版. 西安：西安电子科技大学出版社，2015 </li>
 </ul>
 </div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://chironyf.com/2017/11/05/memory-management/" data-id="cj9mseejm00048676pz63szxw" class="article-share-link">分享</a><div class="tags"><a href="/tags/操作系统/">操作系统</a><a href="/tags/存储器管理/">存储器管理</a></div><div class="post-nav"><a href="/2017/11/05/os-virtual-memory/" class="next">操作系统之虚拟存储器</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/存储器管理/" style="font-size: 15px;">存储器管理</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/UINavigationController/" style="font-size: 15px;">UINavigationController</a> <a href="/tags/UIView/" style="font-size: 15px;">UIView</a> <a href="/tags/地图/" style="font-size: 15px;">地图</a> <a href="/tags/操作系统/" style="font-size: 15px;">操作系统</a> <a href="/tags/Swift/" style="font-size: 15px;">Swift</a> <a href="/tags/虚拟存储器/" style="font-size: 15px;">虚拟存储器</a> <a href="/tags/排序/" style="font-size: 15px;">排序</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/11/05/memory-management/">操作系统之存储器管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/05/os-virtual-memory/">操作系统之虚拟存储器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/map-note-1/">iOS开发之使用高德地图（Swift 3.1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/sort/">常见排序算法的分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/01/ios-navigation-1/">iOS学习笔记之实现导航控制器 (Swift 3.1)</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/27/ios-uiview-1/">iOS学习笔记之自定义UIView（Swift 3.1）</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2017 <a href="/." rel="nofollow">Chironyf.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/x-mathjax-config">MathJax.Hub.Config({
