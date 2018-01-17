@@ -1,0 +1,185 @@
+<!DOCTYPE html><html lang="null"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>数据库期末复习概念总结 | Chironyf</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">数据库期末复习概念总结</h1><a id="logo" href="/.">Chironyf</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">数据库期末复习概念总结</h1><div class="post-meta">Jan 17, 2018<script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><div class="post-content"><p>总结一下数据库复习的一些知识点。<br><a id="more"></a></p>
+<h2 id="1-基础概念"><a href="#1-基础概念" class="headerlink" title="1. 基础概念"></a>1. 基础概念</h2><h3 id="1-1-数据-data"><a href="#1-1-数据-data" class="headerlink" title="1.1 数据(data)"></a>1.1 数据(data)</h3><p>描述事物的符号</p>
+<h3 id="1-2-数据库-database-DB"><a href="#1-2-数据库-database-DB" class="headerlink" title="1.2 数据库(database, DB)"></a>1.2 数据库(database, DB)</h3><p>长期存储在计算机内、有组织、可共享的大量数据的集合<br>其中的数据有如下特点：</p>
+<ul>
+<li>有组织</li>
+<li>可共享</li>
+<li>冗余度小</li>
+<li>独立性高</li>
+<li>永久存储</li>
+</ul>
+<h3 id="1-3-数据库管理系统-DBMS"><a href="#1-3-数据库管理系统-DBMS" class="headerlink" title="1.3 数据库管理系统(DBMS)"></a>1.3 数据库管理系统(DBMS)</h3><p>位于用户与操作系统之间的一层数据管理软件<br>主要功能：</p>
+<ul>
+<li>数据定义</li>
+<li>数据组织、存储和管理</li>
+<li>数据操纵功能</li>
+<li>数据库的事务管理和运行管理</li>
+<li>数据库的建立和维护</li>
+</ul>
+<h3 id="1-4-数据库系统-DBS"><a href="#1-4-数据库系统-DBS" class="headerlink" title="1.4 数据库系统(DBS)"></a>1.4 数据库系统(DBS)</h3><p>由DB, DBMS, 应用程序和数据库管理员(DBA)组成<br>特点：</p>
+<ul>
+<li>数据结构化</li>
+<li>数据共享性高、冗余度底且易扩充</li>
+<li>数据独立性高</li>
+<li>数据由DBMS统一管理和控制</li>
+</ul>
+<h3 id="1-5-数据模型（层次模型、网状模型、关系模型等）"><a href="#1-5-数据模型（层次模型、网状模型、关系模型等）" class="headerlink" title="1.5 数据模型（层次模型、网状模型、关系模型等）"></a>1.5 数据模型（层次模型、网状模型、关系模型等）</h3><p>对现实世界数据特征的抽象，是(DBS)的核心和基础<br>分类：</p>
+<ul>
+<li>概念模型</li>
+<li>逻辑模型和物理模型</li>
+</ul>
+<p>组成要素：</p>
+<ul>
+<li>数据结构</li>
+<li>数据操作</li>
+<li>数据的完整性约束条件</li>
+</ul>
+<h3 id="1-6-DBS的三级模式与二级映像"><a href="#1-6-DBS的三级模式与二级映像" class="headerlink" title="1.6 DBS的三级模式与二级映像"></a>1.6 DBS的三级模式与二级映像</h3><p>三级模式：</p>
+<ul>
+<li>模式（一个）</li>
+<li>外模式（子模式、用户模式，多个）</li>
+<li>内模式（存储模式，一个）</li>
+</ul>
+<p>二级映像</p>
+<ul>
+<li>外模式/模式映像<br>模式改变，只需改变该映像，外模式不用变，体现了<em>数据的逻辑独立性</em></li>
+<li>模式/内模式映像<br>内模式改变，只需改变该映像，模式不用变，体现了<em>数据的物理独立性</em></li>
+</ul>
+<h2 id="2-关系数据库"><a href="#2-关系数据库" class="headerlink" title="2. 关系数据库"></a>2. 关系数据库</h2><p>接下来总结关系数据库的重要知识点</p>
+<h3 id="2-1-关系"><a href="#2-1-关系" class="headerlink" title="2.1 关系"></a>2.1 关系</h3><p>三种类型：</p>
+<ul>
+<li>基本关系（基本表）</li>
+<li>查询表（查询结果对应的表）</li>
+<li>视图表（虚表）</li>
+</ul>
+<h3 id="2-2-关系模型"><a href="#2-2-关系模型" class="headerlink" title="2.2 关系模型"></a>2.2 关系模型</h3><p>数据模型的一种，由以下元素组成：</p>
+<ul>
+<li>关系数据结构</li>
+<li>关系操作集合</li>
+<li>关系完整性约束</li>
+</ul>
+<h3 id="2-3-关系模式-R-U-D-DOM-F"><a href="#2-3-关系模式-R-U-D-DOM-F" class="headerlink" title="2.3 关系模式, R(U, D, DOM, F)"></a>2.3 关系模式, R(U, D, DOM, F)</h3><p>对关系的描述，包括：</p>
+<ul>
+<li>关系名, R</li>
+<li>属性名集合, U</li>
+<li>属性来自的域, D</li>
+<li>属性向域的映像集合, DOM</li>
+<li>属性间数据的依赖关系集合, F</li>
+</ul>
+<h3 id="2-4-关系操作"><a href="#2-4-关系操作" class="headerlink" title="2.4 关系操作"></a>2.4 关系操作</h3><ul>
+<li>常用操作<ul>
+<li>查询(query)</li>
+<li>插入(insert)</li>
+<li>删除(delete)</li>
+<li>修改(update)</li>
+</ul>
+</li>
+<li>基本操作<ul>
+<li>选择</li>
+<li>投影</li>
+<li>并</li>
+<li>差</li>
+<li>笛卡尔积</li>
+</ul>
+</li>
+<li>查询操作<ul>
+<li>基本操作</li>
+<li>连接(自然连接与等值连接的区别在于，比较的分量必须是同名的属性组，并且去掉重复元组)</li>
+<li>除(某属性的象集包含另一关系的某属性所有取值集合)</li>
+<li>交</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-5-关系的完整性"><a href="#2-5-关系的完整性" class="headerlink" title="2.5 关系的完整性"></a>2.5 关系的完整性</h3><ul>
+<li>实体完整性<br>主属性不能是NULL</li>
+<li>参照完整性<br>可以为空，不为空是必须是另一个关系的主码</li>
+<li>用户定义的完整性<br>例如CHECK, NOT NULL…</li>
+</ul>
+<h2 id="3-SQL"><a href="#3-SQL" class="headerlink" title="3. SQL"></a>3. SQL</h2><h3 id="3-1-SQL功能"><a href="#3-1-SQL功能" class="headerlink" title="3.1 SQL功能"></a>3.1 SQL功能</h3><ul>
+<li>数据查询<br>SELECT</li>
+<li>数据定义<br>CREATE, DROP, ALTER</li>
+<li>数据操纵<br>INSERT, DELETE, UPDATE</li>
+<li>数据控制<br>GRANT, REVOKE</li>
+</ul>
+<h3 id="3-2-基本语法"><a href="#3-2-基本语法" class="headerlink" title="3.2 基本语法"></a>3.2 基本语法</h3><ul>
+<li><p>定义模式</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">CREATE <span class="keyword">SCHEMA </span><span class="keyword">schema_name </span>AUTHORIZATION user_name<span class="comment">;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>定义基本表</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">CREATE TABLE table_name (column_name ...);</div><div class="line"></div><div class="line"># exp</div><div class="line">########################</div><div class="line"># <span class="number">6.</span> Create 房间信息 table</div><div class="line">########################</div><div class="line">CREATE TABLE room</div><div class="line">(</div><div class="line">	# 房间号（主码）</div><div class="line">	roomNumber CHAR(<span class="number">6</span>),</div><div class="line">	# 房间类型</div><div class="line">	roomType VARCHAR(<span class="number">32</span>) NOT NULL,</div><div class="line">	# 状态</div><div class="line">	roomStatus CHAR(<span class="number">6</span>) check (roomStatus=<span class="string">'空'</span> or roomStatus=<span class="string">'非空'</span>), # 空/非空 </div><div class="line">	# 备注</div><div class="line">	remarks VARCHAR(<span class="number">32</span>),</div><div class="line">	# 主键</div><div class="line">	PRIMARY KEY (roomNumber),</div><div class="line">	# 外键</div><div class="line">	FOREIGN KEY (roomType) REFERENCES roomTypeAndPrice(roomType)</div><div class="line">	</div><div class="line">) ENGINE=InnoDB;</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改基本表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> table_name</div><div class="line"># 新增列</div><div class="line"><span class="keyword">ADD</span> [<span class="keyword">COLUMN</span>] column_name data_type [约束]</div><div class="line"># 添加表级约束</div><div class="line"><span class="keyword">ADD</span> 表级约束</div><div class="line"># 删除列</div><div class="line"><span class="keyword">DROP</span> [<span class="keyword">COLUMN</span>] column_name [<span class="keyword">CASCADE</span> | RESTRICT]</div><div class="line"># 删除约束</div><div class="line"><span class="keyword">DROP</span> <span class="keyword">CONSTRAINT</span> constraint_name [<span class="keyword">CASCADE</span> | RESTRICT]</div><div class="line"># 修改列</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">COLUMN</span> column_name data_type</div></pre></td></tr></table></figure>
+</li>
+<li><p>删除基本表</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DROP <span class="keyword">TABLE</span> table_name <span class="comment">[CASCADE</span> |<span class="comment"> RESTRICT]</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>索引</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># exp</div><div class="line"># 创建room 中roomtype和roomstatus 的混合索引</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">INDEX</span> indexRoomTypeStatus <span class="keyword">ON</span> room (roomType, roomStatus);</div><div class="line"># 删除索引</div><div class="line"><span class="keyword">DROP</span> <span class="keyword">INDEX</span> indexRoomTypeStatus</div></pre></td></tr></table></figure>
+</li>
+<li><p>查询</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> [<span class="keyword">ALL</span> | <span class="keyword">DISTINCT</span>] ...</div><div class="line"><span class="keyword">FROM</span> ...</div><div class="line">[<span class="keyword">WHERE</span> ...]</div><div class="line">[<span class="keyword">GROUP</span> <span class="keyword">BY</span> ... [<span class="keyword">HAVING</span> ...]]</div><div class="line">[<span class="keyword">ORDER</span> <span class="keyword">BY</span> ... [<span class="keyword">ASC</span> | <span class="keyword">DESC</span>]]</div></pre></td></tr></table></figure>
+</li>
+<li><p>插入数据</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># exp</span></div><div class="line">INSERT INTO waiter VALUES ('chiron', 'yf', '<span class="number">1998-10-22</span>', '<span class="number">43072319981022</span><span class="number">6011</span>', '<span class="number">3342</span>', '<span class="number">2017-12-06</span>', '<span class="number">1322563263</span>7', 'ppp');</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改数据</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">UPDATE table_name</div><div class="line"><span class="built_in">SET</span> col = <span class="params">...</span>, col1 = <span class="params">...</span></div><div class="line"><span class="meta">[</span><span class="keyword">WHERE</span> <span class="params">...</span><span class="meta">]</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>删除数据</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DELETE</span> FROM table_name</div><div class="line">[<span class="built_in">WHERE</span> ...]</div><div class="line"><span class="meta"># 不写条件子句表示全删</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>建立视图</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"># exp</div><div class="line"># 创建房间信息视图</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> roomInfo</div><div class="line"><span class="keyword">AS</span></div><div class="line"><span class="keyword">SELECT</span></div><div class="line">    room.*, rp.price,</div><div class="line">    rp.url</div><div class="line"><span class="keyword">FROM</span></div><div class="line">    room, roomtypeandprice rp</div><div class="line"><span class="keyword">WHERE</span></div><div class="line">    room.roomType = rp.roomType ;</div></pre></td></tr></table></figure>
+</li>
+<li><p>断言</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 限制一门课最多被60人选修</span></div><div class="line">CREATE ASSERTION as_sn</div><div class="line">CHECK (60 &gt;= ALL(</div><div class="line">	SELECT COUNT(*)</div><div class="line">	<span class="keyword">FROM</span> sc</div><div class="line"><span class="built_in">	GROUP </span>BY cno))</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-3-其它"><a href="#3-3-其它" class="headerlink" title="3.3 其它"></a>3.3 其它</h3><ul>
+<li>视图的作用<ul>
+<li>简化用户操作</li>
+<li>使用户多角度看待同一数据</li>
+<li>对重构数据库提供了一定的逻辑独立性</li>
+<li>对机密数据提供安全保护</li>
+<li>清晰地表达查询</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-关系数据理论"><a href="#4-关系数据理论" class="headerlink" title="4. 关系数据理论"></a>4. 关系数据理论</h2><h3 id="4-1-基础"><a href="#4-1-基础" class="headerlink" title="4.1 基础"></a>4.1 基础</h3><ul>
+<li>数据依赖<ul>
+<li>函数依赖(关系模式中的两个不同的属性组X和Y，只要X相同，必定Y相同，称为Y函数依赖于X)<br>有完全函数依赖F，部分函数依赖P，传递函数依赖</li>
+<li>多值依赖</li>
+</ul>
+</li>
+<li>问题<ul>
+<li>数据冗余</li>
+<li>更新异常</li>
+<li>插入异常</li>
+<li>删除异常</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-范式"><a href="#4-2-范式" class="headerlink" title="4.2 范式"></a>4.2 范式</h3><p>5NF ⊂ 4NF ⊂ BCNF ⊂ 3NF ⊂ 2NF ⊂ 1NF</p>
+<ul>
+<li>第一范式(1NF)，每一个分量都是不可分的数据项</li>
+</ul>
+<p>从 1NF -&gt; 2NF 消除非主属性对码的部分函数依赖</p>
+<ul>
+<li>第二范式(2NF)，在第一范式的基础上，每一个非主属性都完全函数依赖于候选码，没有部分依赖</li>
+</ul>
+<p>从 2NF -&gt; 3NF 消除非主属性对码的传递函数依赖</p>
+<ul>
+<li>第三范式(3NF)，在第一范式的基础上，没有属性对码是传递依赖的</li>
+</ul>
+<p>从 3NF -&gt; BCNF 消除非主属性对码的部分和传递函数依赖</p>
+<ul>
+<li>BCNF<ul>
+<li>所有非主属性对每一个码都是完全函数依赖</li>
+<li>所有主属性对每一个不包含它的码也是完全函数依赖</li>
+<li>没有任何属性完全函数依赖于非码的任何一组属性</li>
+</ul>
+</li>
+</ul>
+<p>从 BCNF -&gt; 4NF 消除非平凡且非函数依赖的多值依赖</p>
+</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://chironyf.com/2018/01/17/db-test-summary/" data-id="cjcirldtz0000w076ribmcy2l" class="article-share-link">分享</a><div class="tags"><a href="/tags/数据库/">数据库</a><a href="/tags/database/">database</a></div><div class="post-nav"><a href="/2018/01/11/hotel-management-system-summary/" class="next">数据库课设之宾馆管理系统</a></div><div id="uyan_frame"></div><script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2148303"></script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/UIView/" style="font-size: 15px;">UIView</a> <a href="/tags/数据库/" style="font-size: 15px;">数据库</a> <a href="/tags/博客/" style="font-size: 15px;">博客</a> <a href="/tags/GitHub/" style="font-size: 15px;">GitHub</a> <a href="/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/tags/Swift/" style="font-size: 15px;">Swift</a> <a href="/tags/UINavigationController/" style="font-size: 15px;">UINavigationController</a> <a href="/tags/database/" style="font-size: 15px;">database</a> <a href="/tags/management-system/" style="font-size: 15px;">management-system</a> <a href="/tags/MySQL/" style="font-size: 15px;">MySQL</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/String/" style="font-size: 15px;">String</a> <a href="/tags/字符流/" style="font-size: 15px;">字符流</a> <a href="/tags/字节流/" style="font-size: 15px;">字节流</a> <a href="/tags/地图/" style="font-size: 15px;">地图</a> <a href="/tags/操作系统/" style="font-size: 15px;">操作系统</a> <a href="/tags/存储器管理/" style="font-size: 15px;">存储器管理</a> <a href="/tags/虚拟存储器/" style="font-size: 15px;">虚拟存储器</a> <a href="/tags/排序/" style="font-size: 15px;">排序</a> <a href="/tags/算法/" style="font-size: 15px;">算法</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2018/01/17/db-test-summary/">数据库期末复习概念总结</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/11/hotel-management-system-summary/">数据库课设之宾馆管理系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/07/java-stream/">利用read()方法深入理解Java字节流与字符流</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/06/github-deploy/">关于Hexo博客部署到GitHub后没有contribution的解决办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/04/java-string/">Java之字符串辨析</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/05/memory-management/">存储器管理</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/11/05/os-virtual-memory/">虚拟存储器</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/07/map-note-1/">iOS开发之使用高德地图（Swift 3.1）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/05/sort/">常见排序算法的分析（待续...）</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/01/ios-navigation-1/">iOS学习笔记之实现导航控制器 (Swift 3.1)</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2018 <a href="/." rel="nofollow">Chironyf.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/3.0.47/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
