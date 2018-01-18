@@ -308,11 +308,10 @@ div {
     height: 25px;
     line-height: 25px;
     padding: 5px 9px;
-    border: 1px solid #DDD;
+    border: 0px solid #DDD;
     text-align: center; }
     .page-navigator a:hover, .page-navigator span:hover {
-      background: #F8F8F8;
-      border-bottom-color: #D26911; }
+      color: #4682B4; }
     .page-navigator a.prev, .page-navigator span.prev {
       float: left; }
       .page-navigator a.prev:before, .page-navigator span.prev:before {
@@ -326,8 +325,7 @@ div {
         content: "\f101";
         padding-left: 0.3em; }
   .page-navigator .current {
-    background: #F8F8F8;
-    border-bottom-color: #D26911; }
+    color: #4682B4; }
   .page-navigator .space {
     border: none;
     padding: 5px 5px; }
